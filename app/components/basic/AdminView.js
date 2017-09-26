@@ -1,11 +1,15 @@
 import React from 'react';
 import Employee from '../model/Employee';
-import EmployeeView from 'EmployeeView'
+// import EmployeeView from 'EmployeeView'
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import {saveEmployees} from '../../actions/index';
+import PropTypes from 'prop-types';
+import { bindActionCreators } from 'redux';
 
 const employeesData = ['Jennifer', 'John'];
 
-export default class AdminView extends React.Component {
+export class AdminView extends React.Component {
 
     constructor(props) {
         super(props);
@@ -15,11 +19,10 @@ export default class AdminView extends React.Component {
     }
 
     componentWillMount() {
-
         this.constructEmployeesList(employeesData);
     }
 
-    constructEmployeesList(employeesData) {
+    constructEmployeesList() {
         const employeesList = [];
         employeesData.map((emp, index) => {
             employeesList.push(new Employee(index, emp));
@@ -27,6 +30,7 @@ export default class AdminView extends React.Component {
         this.setState({
             employees: employeesList
         });
+        this.props.dispatch(saveEmployees(employeesList));
     }
 
     render() {
@@ -43,3 +47,13 @@ export default class AdminView extends React.Component {
         </div>);
     }
 }
+AdminView.propTypes = {
+    dispatch: PropTypes.func
+};
+
+const mapDispatchToProps = (dispatch) => {
+    const actions = bindActionCreators({ saveEmployees });
+    return { ...actions, dispatch };
+};
+
+export default connect(null, mapDispatchToProps)(AdminView);

@@ -9,6 +9,7 @@ export function filterTable(filter) {
 
 export function saveEmployees(employees) {
     return {
-        employees
+        type: 'SAVE_EMPLOYEES',
+        employeesList: employees
     };
 }

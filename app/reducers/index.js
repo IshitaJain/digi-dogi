@@ -1,24 +1,23 @@
-import { routerReducer as routing } from 'react-router-redux';
-import { combineReducers } from 'redux';
-import * as types from '../actions/types';
+// import { routerReducer as routing } from 'react-router-redux';
+// import { combineReducers } from 'redux';
+// import * as types from '../actions/types';
 
-const filter = (state = '', action) => {
-    switch (action.type) {
-        case types.FILTER:
-            return action.filter;
-        default:
-            return state;
+export const initialState = {
+    employeesList: null
+};
+
+const copyObject = (obj) => Object.assign({}, obj);
+
+const actionsMap = {
+    'SAVE_EMPLOYEES': (state, action) => {
+        const stateCopy = copyObject(state);
+        stateCopy.employeesList = action.employeesList;
+        console.log(stateCopy);
+        return stateCopy;
     }
 };
 
-const saveEmployees = (state = '', action) => {
-
+export default function reducer(state = initialState, action = {}) {
+    const fn = actionsMap[action.type];
+    return fn ? fn(state, action) : state;
 }
-
-
-const rootReducer = combineReducers({
-    filter,
-    routing
-});
-
-export default rootReducer;
