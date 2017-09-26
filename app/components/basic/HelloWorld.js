@@ -1,6 +1,3 @@
-/**
- * Created by ishitajain on 2017-09-03.
- */
 import React from 'react';
 
 
