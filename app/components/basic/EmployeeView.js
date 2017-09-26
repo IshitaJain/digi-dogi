@@ -1,21 +1,18 @@
 import React from 'react';
 import Employee from '../model/Employee';
-import EmployeeView from 'EmployeeView'
-import { Link } from 'react-router-dom';
 
-const employeesData = ['Jennifer', 'John'];
-
-export default class AdminView extends React.Component {
+export default class EmployeeView extends React.Component {
 
     constructor(props) {
         super(props);
+        console.log(props);
         this.state = {
-            employees: null
+            employeeId: props.match.params.employeeId
         };
     }
 
     componentWillMount() {
-
+        const employeesData = ['Jennifer', 'John'];
         this.constructEmployeesList(employeesData);
     }
 
@@ -31,15 +28,8 @@ export default class AdminView extends React.Component {
 
     render() {
         return (<div>
-            <h1>Admin View</h1>
-            <h3>Employees List:</h3>
-            {this.state.employees.map((emp) => {
-                return (
-                    <div id={emp.id} key={emp.id}>
-                        <Link to={'/employee/' + emp.id} param={emp}>{emp.name}</Link>
-                    </div>
-                );
-            })}
+            <h1>Hello</h1>
+
         </div>);
     }
 }

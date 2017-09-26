@@ -11,6 +11,10 @@ const filter = (state = '', action) => {
     }
 };
 
+const saveEmployees = (state = '', action) => {
+
+}
+
 
 const rootReducer = combineReducers({
     filter,

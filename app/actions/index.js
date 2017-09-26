@@ -6,3 +6,9 @@ export function filterTable(filter) {
         filter
     };
 }
+
+export function saveEmployees(employees) {
+    return {
+        employees
+    };
+}
